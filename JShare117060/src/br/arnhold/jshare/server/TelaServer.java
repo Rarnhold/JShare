@@ -18,12 +18,16 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import java.awt.Color;
 
 public class TelaServer extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtIp;
+	private JTextField txtPorta;
+	private JTextArea txtApresentacao;
+	private JButton btnIniciaServico;
+	private JButton btnFecharServico;
 
 	/**
 	 * Launch the application.
@@ -45,6 +49,7 @@ public class TelaServer extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaServer() {
+		setTitle("Servidor Capiroto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -53,7 +58,7 @@ public class TelaServer extends JFrame {
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
@@ -65,16 +70,16 @@ public class TelaServer extends JFrame {
 		gbc_lblIp.gridy = 0;
 		contentPane.add(lblIp, gbc_lblIp);
 		
-		textField = new JTextField();
-		textField.setText("127.0.0.1");
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.anchor = GridBagConstraints.WEST;
-		gbc_textField.gridwidth = 2;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 0;
-		contentPane.add(textField, gbc_textField);
-		textField.setColumns(10);
+		txtIp = new JTextField();
+		txtIp.setText("127.0.0.1");
+		GridBagConstraints gbc_txtIp = new GridBagConstraints();
+		gbc_txtIp.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtIp.gridwidth = 4;
+		gbc_txtIp.insets = new Insets(0, 0, 5, 5);
+		gbc_txtIp.gridx = 1;
+		gbc_txtIp.gridy = 0;
+		contentPane.add(txtIp, gbc_txtIp);
+		txtIp.setColumns(10);
 		
 		JLabel lblPorta = new JLabel("Porta:");
 		GridBagConstraints gbc_lblPorta = new GridBagConstraints();
@@ -84,39 +89,70 @@ public class TelaServer extends JFrame {
 		gbc_lblPorta.gridy = 1;
 		contentPane.add(lblPorta, gbc_lblPorta);
 		
-		textField_1 = new JTextField();
-		textField_1.setText("1001");
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.anchor = GridBagConstraints.WEST;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 1;
-		contentPane.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		txtPorta = new JTextField();
+		txtPorta.setText("1001");
+		GridBagConstraints gbc_txtPorta = new GridBagConstraints();
+		gbc_txtPorta.gridwidth = 3;
+		gbc_txtPorta.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtPorta.insets = new Insets(0, 0, 5, 5);
+		gbc_txtPorta.gridx = 1;
+		gbc_txtPorta.gridy = 1;
+		contentPane.add(txtPorta, gbc_txtPorta);
+		txtPorta.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Conectar");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnIniciaServico = new JButton("Inicia Serviço");
+		btnIniciaServico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				iniciarServidor();
 			}
 		});
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 2;
-		gbc_btnNewButton.gridy = 1;
-		contentPane.add(btnNewButton, gbc_btnNewButton);
+		GridBagConstraints gbc_btnIniciaServico = new GridBagConstraints();
+		gbc_btnIniciaServico.insets = new Insets(0, 0, 5, 5);
+		gbc_btnIniciaServico.gridx = 4;
+		gbc_btnIniciaServico.gridy = 1;
+		contentPane.add(btnIniciaServico, gbc_btnIniciaServico);
+		
+		btnFecharServico = new JButton("Parar Serviço");
+		btnFecharServico.setEnabled(false);
+		btnFecharServico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				pararServico();
+			}
+		});
+		GridBagConstraints gbc_btnFecharServico = new GridBagConstraints();
+		gbc_btnFecharServico.insets = new Insets(0, 0, 5, 5);
+		gbc_btnFecharServico.gridx = 5;
+		gbc_btnFecharServico.gridy = 1;
+		contentPane.add(btnFecharServico, gbc_btnFecharServico);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridwidth = 10;
-		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 2;
 		contentPane.add(scrollPane, gbc_scrollPane);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setEditable(false);
-		scrollPane.setViewportView(textPane);
+		txtApresentacao = new JTextArea();
+		txtApresentacao.setForeground(Color.BLACK);
+		txtApresentacao.setEditable(false);
+		scrollPane.setViewportView(txtApresentacao);
+	}
+
+	protected void pararServico() {
+		btnIniciaServico.setEnabled(true);
+		btnFecharServico.setEnabled(false);
+		txtApresentacao.append("Serviço Parado \n");
+		
+		
+	}
+
+	private void iniciarServidor() {
+		btnIniciaServico.setEnabled(false);
+		btnFecharServico.setEnabled(true);
+		txtApresentacao.append("Serviço iniciado \n");	
+		
+		
 	}
 
 }
