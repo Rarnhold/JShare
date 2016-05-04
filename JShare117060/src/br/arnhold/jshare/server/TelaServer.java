@@ -134,7 +134,8 @@ public class TelaServer extends JFrame {
 		contentPane.add(scrollPane, gbc_scrollPane);
 		
 		txtApresentacao = new JTextArea();
-		txtApresentacao.setForeground(Color.BLACK);
+		txtApresentacao.setBackground(Color.BLACK);
+		txtApresentacao.setForeground(Color.WHITE);
 		txtApresentacao.setEditable(false);
 		scrollPane.setViewportView(txtApresentacao);
 	}
@@ -142,6 +143,8 @@ public class TelaServer extends JFrame {
 	protected void pararServico() {
 		btnIniciaServico.setEnabled(true);
 		btnFecharServico.setEnabled(false);
+		txtIp.setEnabled(true);
+		txtPorta.setEnabled(true);
 		txtApresentacao.append("Serviço Parado \n");
 		
 		
@@ -150,6 +153,8 @@ public class TelaServer extends JFrame {
 	private void iniciarServidor() {
 		btnIniciaServico.setEnabled(false);
 		btnFecharServico.setEnabled(true);
+		txtIp.setEnabled(false);
+		txtPorta.setEditable(false);
 		txtApresentacao.append("Serviço iniciado \n");	
 		
 		
