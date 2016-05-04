@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.awt.event.ActionEvent;
@@ -37,6 +38,8 @@ public class TelaServer extends JFrame  implements IServer {
 	private JTextArea txtApresentacao;
 	private JButton btnIniciaServico;
 	private JButton btnFecharServico;
+	//Lista de cliente
+	private List<Cliente> listaCliente = new ArrayList<>(); 
 
 	/**
 	 * Launch the application.
@@ -152,7 +155,7 @@ public class TelaServer extends JFrame  implements IServer {
 
 	protected void pararServico() {
 		btnIniciaServico.setEnabled(true);
-		btnFecharServico.setEnabled(false);
+		// TODO Auto-generated method stubtnFecharServico.setEnabled(false);
 		txtIp.setEnabled(true);
 		txtPorta.setEnabled(true);
 		txtApresentacao.append("Serviço Parado \n");
@@ -170,9 +173,12 @@ public class TelaServer extends JFrame  implements IServer {
 		
 	}
 
+	
 	@Override
 	public void registrarCliente(Cliente c) throws RemoteException {
-		// TODO Auto-generated method stub
+		listaCliente.add(c);
+		
+		txtApresentacao.append("Cliente "+ c.getNome() +" adicionado com sucesso");
 		
 	}
 
@@ -196,7 +202,9 @@ public class TelaServer extends JFrame  implements IServer {
 
 	@Override
 	public void desconectar(Cliente c) throws RemoteException {
-		// TODO Auto-generated method stub
+		listaCliente.remove(c);
+		
+		txtApresentacao.append("Cliente "+ c.getNome() +" removido com sucesso");
 		
 	}
 
