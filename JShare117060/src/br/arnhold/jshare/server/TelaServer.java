@@ -6,6 +6,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.dagostini.jshare.comum.pojos.Arquivo;
+import br.dagostini.jshare.comun.Cliente;
+import br.dagostini.jshare.comun.IServer;
+
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
@@ -14,13 +19,17 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+import java.util.List;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.awt.Color;
+import java.awt.Font;
 
-public class TelaServer extends JFrame {
+public class TelaServer extends JFrame  implements IServer {
 
 	private JPanel contentPane;
 	private JTextField txtIp;
@@ -134,6 +143,7 @@ public class TelaServer extends JFrame {
 		contentPane.add(scrollPane, gbc_scrollPane);
 		
 		txtApresentacao = new JTextArea();
+		txtApresentacao.setFont(new Font("Dialog", Font.BOLD, 12));
 		txtApresentacao.setBackground(Color.BLACK);
 		txtApresentacao.setForeground(Color.WHITE);
 		txtApresentacao.setEditable(false);
@@ -157,6 +167,36 @@ public class TelaServer extends JFrame {
 		txtPorta.setEditable(false);
 		txtApresentacao.append("Serviço iniciado \n");	
 		
+		
+	}
+
+	@Override
+	public void registrarCliente(Cliente c) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void publicarListaArquivos(Cliente c, List<Arquivo> lista) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Map<Cliente, List<Arquivo>> procurarArquivo(String nome) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public byte[] baixarArquivo(Arquivo arq) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void desconectar(Cliente c) throws RemoteException {
+		// TODO Auto-generated method stub
 		
 	}
 
