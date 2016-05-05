@@ -6,10 +6,24 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.GridBagLayout;
+import javax.swing.JLabel;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class TelaCliente extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField txtPortaServidor;
+	private JTextField txtIpServidor;
+	private JTextField txtNomeCliente;
+	private JTextField textField_3;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -37,6 +51,119 @@ public class TelaCliente extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.NORTH);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
+		
+		JLabel lblNome = new JLabel("Nome:");
+		GridBagConstraints gbc_lblNome = new GridBagConstraints();
+		gbc_lblNome.anchor = GridBagConstraints.EAST;
+		gbc_lblNome.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNome.gridx = 0;
+		gbc_lblNome.gridy = 0;
+		panel.add(lblNome, gbc_lblNome);
+		
+		txtNomeCliente = new JTextField();
+		GridBagConstraints gbc_txtNomeCliente = new GridBagConstraints();
+		gbc_txtNomeCliente.gridwidth = 11;
+		gbc_txtNomeCliente.insets = new Insets(0, 0, 5, 5);
+		gbc_txtNomeCliente.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtNomeCliente.gridx = 1;
+		gbc_txtNomeCliente.gridy = 0;
+		panel.add(txtNomeCliente, gbc_txtNomeCliente);
+		txtNomeCliente.setColumns(10);
+		
+		JLabel lblIpDoServidor = new JLabel("Ip do servidor:");
+		GridBagConstraints gbc_lblIpDoServidor = new GridBagConstraints();
+		gbc_lblIpDoServidor.anchor = GridBagConstraints.EAST;
+		gbc_lblIpDoServidor.fill = GridBagConstraints.VERTICAL;
+		gbc_lblIpDoServidor.insets = new Insets(0, 0, 5, 5);
+		gbc_lblIpDoServidor.gridx = 0;
+		gbc_lblIpDoServidor.gridy = 1;
+		panel.add(lblIpDoServidor, gbc_lblIpDoServidor);
+		
+		txtIpServidor = new JTextField();
+		GridBagConstraints gbc_txtIpServidor = new GridBagConstraints();
+		gbc_txtIpServidor.gridwidth = 7;
+		gbc_txtIpServidor.insets = new Insets(0, 0, 5, 5);
+		gbc_txtIpServidor.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtIpServidor.gridx = 1;
+		gbc_txtIpServidor.gridy = 1;
+		panel.add(txtIpServidor, gbc_txtIpServidor);
+		txtIpServidor.setColumns(10);
+		
+		JLabel lblPorta = new JLabel("Porta:");
+		GridBagConstraints gbc_lblPorta = new GridBagConstraints();
+		gbc_lblPorta.anchor = GridBagConstraints.EAST;
+		gbc_lblPorta.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPorta.gridx = 0;
+		gbc_lblPorta.gridy = 2;
+		panel.add(lblPorta, gbc_lblPorta);
+		
+		txtPortaServidor = new JTextField();
+		GridBagConstraints gbc_txtPortaServidor = new GridBagConstraints();
+		gbc_txtPortaServidor.fill = GridBagConstraints.BOTH;
+		gbc_txtPortaServidor.gridwidth = 5;
+		gbc_txtPortaServidor.insets = new Insets(0, 0, 5, 5);
+		gbc_txtPortaServidor.gridx = 1;
+		gbc_txtPortaServidor.gridy = 2;
+		panel.add(txtPortaServidor, gbc_txtPortaServidor);
+		txtPortaServidor.setColumns(10);
+		
+		JButton btnConectar = new JButton("Conectar");
+		GridBagConstraints gbc_btnConectar = new GridBagConstraints();
+		gbc_btnConectar.gridwidth = 2;
+		gbc_btnConectar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnConectar.gridx = 6;
+		gbc_btnConectar.gridy = 2;
+		panel.add(btnConectar, gbc_btnConectar);
+		
+		JButton btnDesconectar = new JButton("Desconectar");
+		btnDesconectar.setHorizontalAlignment(SwingConstants.RIGHT);
+		GridBagConstraints gbc_btnDesconectar = new GridBagConstraints();
+		gbc_btnDesconectar.fill = GridBagConstraints.VERTICAL;
+		gbc_btnDesconectar.gridwidth = 4;
+		gbc_btnDesconectar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnDesconectar.gridx = 8;
+		gbc_btnDesconectar.gridy = 2;
+		panel.add(btnDesconectar, gbc_btnDesconectar);
+		
+		JLabel lblProcurar = new JLabel("Procurar");
+		GridBagConstraints gbc_lblProcurar = new GridBagConstraints();
+		gbc_lblProcurar.anchor = GridBagConstraints.EAST;
+		gbc_lblProcurar.insets = new Insets(0, 0, 0, 5);
+		gbc_lblProcurar.gridx = 0;
+		gbc_lblProcurar.gridy = 3;
+		panel.add(lblProcurar, gbc_lblProcurar);
+		
+		textField_3 = new JTextField();
+		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
+		gbc_textField_3.gridwidth = 6;
+		gbc_textField_3.insets = new Insets(0, 0, 0, 5);
+		gbc_textField_3.fill = GridBagConstraints.BOTH;
+		gbc_textField_3.gridx = 2;
+		gbc_textField_3.gridy = 3;
+		panel.add(textField_3, gbc_textField_3);
+		textField_3.setColumns(10);
+		
+		JButton btnProcurar = new JButton("Procurar");
+		GridBagConstraints gbc_btnProcurar = new GridBagConstraints();
+		gbc_btnProcurar.gridwidth = 4;
+		gbc_btnProcurar.gridx = 8;
+		gbc_btnProcurar.gridy = 3;
+		panel.add(btnProcurar, gbc_btnProcurar);
+		
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.CENTER);
+		
+		table = new JTable();
+		panel_1.add(table);
 	}
 
 }

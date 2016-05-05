@@ -166,7 +166,9 @@ public class TelaServer extends JFrame implements IServer {
 
 		try {
 			servidor = (IServer) UnicastRemoteObject.exportObject(this, 0);
+			//Criar o registro utilizando a porta
 			registry = LocateRegistry.createRegistry(Integer.parseInt(txtPorta.getText().trim()));
+			//registra a variavel public static final String NOME_SERVICO = "JShare";
 			registry.rebind(IServer.NOME_SERVICO, servidor);
 
 		} catch (RemoteException e) {
@@ -180,7 +182,6 @@ public class TelaServer extends JFrame implements IServer {
 
 	protected void pararServico() {
 		btnIniciaServico.setEnabled(true);
-		// TODO Auto-generated method stubtnFecharServico.setEnabled(false);
 		txtIp.setEnabled(true);
 		txtPorta.setEnabled(true);
 
@@ -188,7 +189,6 @@ public class TelaServer extends JFrame implements IServer {
 			UnicastRemoteObject.unexportObject(this, true);
 			UnicastRemoteObject.unexportObject(registry, true);
 		} catch (NoSuchObjectException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
