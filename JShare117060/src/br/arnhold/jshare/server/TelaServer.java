@@ -1,6 +1,6 @@
 package br.arnhold.jshare.server;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -17,14 +17,15 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
 import javax.swing.JLabel;
-import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.awt.Color;
@@ -38,6 +39,8 @@ public class TelaServer extends JFrame  implements IServer {
 	private JTextArea txtApresentacao;
 	private JButton btnIniciaServico;
 	private JButton btnFecharServico;
+	private IServer servidor;
+	
 	//Lista de cliente
 	private List<Cliente> listaCliente = new ArrayList<>(); 
 
@@ -158,6 +161,9 @@ public class TelaServer extends JFrame  implements IServer {
 		// TODO Auto-generated method stubtnFecharServico.setEnabled(false);
 		txtIp.setEnabled(true);
 		txtPorta.setEnabled(true);
+		
+		
+		
 		txtApresentacao.append("Serviço Parado \n");
 		
 		
@@ -168,6 +174,19 @@ public class TelaServer extends JFrame  implements IServer {
 		btnFecharServico.setEnabled(true);
 		txtIp.setEnabled(false);
 		txtPorta.setEditable(false);
+		
+		try {
+			servidor = (IServer) UnicastRemoteObject.exportObject(this,0);
+			Registry registry = LocateRegistry.createRegistry(Integer.parseInt(txtPorta.getText().trim()));
+			registry.rebind(IServer.NOME_SERVICO, servidor);
+		
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 		txtApresentacao.append("Serviço iniciado \n");	
 		
 		
