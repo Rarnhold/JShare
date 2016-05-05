@@ -107,7 +107,7 @@ public class TelaServer extends JFrame implements IServer {
 		contentPane.add(lblPorta, gbc_lblPorta);
 
 		txtPorta = new JTextField();
-		txtPorta.setText("1001");
+		txtPorta.setText("1818");
 		GridBagConstraints gbc_txtPorta = new GridBagConstraints();
 		gbc_txtPorta.gridwidth = 3;
 		gbc_txtPorta.fill = GridBagConstraints.HORIZONTAL;
@@ -200,7 +200,7 @@ public class TelaServer extends JFrame implements IServer {
 	public void registrarCliente(Cliente c) throws RemoteException {
 		listaCliente.add(c);
 
-		txtApresentacao.append("Cliente " + c.getNome() + " adicionado com sucesso");
+		txtApresentacao.append("Cliente " + c.getNome() + " adicionado com sucesso\n");
 
 	}
 
@@ -226,7 +226,7 @@ public class TelaServer extends JFrame implements IServer {
 	public void desconectar(Cliente c) throws RemoteException {
 		listaCliente.remove(c);
 
-		txtApresentacao.append("Cliente " + c.getNome() + " removido com sucesso");
+		txtApresentacao.append("Cliente " + c.getNome() + " removido com sucesso\n");
 
 	}
 
